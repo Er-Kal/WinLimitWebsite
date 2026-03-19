@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WinLimit — Take Back Your Time</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--bg: #f7f7f5;
+				--surface: #ffffff;
+				--surface-2: #f0f0ee;
+				--border: #e4e4e0;
+				--border-subtle: #efefec;
+				--text-primary: #1a1a18;
+				--text-secondary: #5c5c58;
+				--text-muted: #9c9c96;
+				--accent: #3b6ef8;
+				--accent-light: #eef2ff;
+				--accent-mid: #c7d4fd;
+				--accent-dark: #2855d6;
+				--shadow-sm:
+					0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+				--shadow-md:
+					0 4px 16px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
+				--shadow-lg:
+					0 12px 40px rgba(0, 0, 0, 0.09), 0 2px 8px rgba(0, 0, 0, 0.04);
+				--radius: 10px;
+				--radius-lg: 16px;
+				--radius-xl: 22px;
+				--font: "DM Sans", sans-serif;
+				--mono: "DM Mono", monospace;
+			}
+
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				font-family: var(--font);
+				background: var(--bg);
+				color: var(--text-primary);
+				line-height: 1.6;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			/* NAV */
+			nav {
+				position: sticky;
+				top: 0;
+				z-index: 100;
+				background: rgba(247, 247, 245, 0.88);
+				backdrop-filter: blur(12px);
+				border-bottom: 1px solid var(--border-subtle);
+				padding: 0 2rem;
+			}
+			.nav-inner {
+				max-width: 1080px;
+				margin: 0 auto;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 56px;
+			}
+			.nav-logo {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-weight: 600;
+				font-size: 1rem;
+				color: var(--text-primary);
+				text-decoration: none;
+			}
+			.nav-logo-icon {
+				width: 28px;
+				height: 28px;
+				background: var(--accent);
+				border-radius: 7px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.nav-logo-icon svg {
+				width: 16px;
+				height: 16px;
+				fill: white;
+			}
+			.nav-links {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+				list-style: none;
+			}
+			.nav-links a {
+				font-size: 0.875rem;
+				color: var(--text-secondary);
+				text-decoration: none;
+				transition: color 0.2s;
+			}
+			.nav-links a:hover {
+				color: var(--text-primary);
+			}
+			.nav-cta {
+				font-size: 0.875rem;
+				font-weight: 500;
+				background: var(--accent);
+				color: white;
+				border: none;
+				border-radius: 8px;
+				padding: 8px 16px;
+				cursor: pointer;
+				text-decoration: none;
+				transition:
+					background 0.2s,
+					transform 0.15s;
+			}
+			.nav-cta:hover {
+				background: var(--accent-dark);
+				transform: translateY(-1px);
+			}
+
+			/* HERO */
+			.hero {
+				max-width: 1080px;
+				margin: 0 auto;
+				padding: 80px 2rem 60px;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 4rem;
+				align-items: center;
+			}
+			.hero-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				background: var(--accent-light);
+				border: 1px solid var(--accent-mid);
+				color: var(--accent);
+				border-radius: 999px;
+				font-size: 0.78rem;
+				font-weight: 500;
+				padding: 4px 12px;
+				margin-bottom: 1.25rem;
+				animation: fadeUp 0.5s ease both;
+			}
+			.hero-badge::before {
+				content: "";
+				width: 6px;
+				height: 6px;
+				background: var(--accent);
+				border-radius: 50%;
+			}
+			h1 {
+				font-size: clamp(2rem, 4vw, 2.9rem);
+				font-weight: 600;
+				line-height: 1.2;
+				letter-spacing: -0.03em;
+				color: var(--text-primary);
+				margin-bottom: 1rem;
+				animation: fadeUp 0.5s ease 0.1s both;
+			}
+			h1 em {
+				font-style: normal;
+				color: var(--accent);
+			}
+			.hero-sub {
+				font-size: 1.05rem;
+				color: var(--text-secondary);
+				font-weight: 300;
+				max-width: 480px;
+				margin-bottom: 2rem;
+				animation: fadeUp 0.5s ease 0.2s both;
+			}
+			.hero-actions {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				flex-wrap: wrap;
+				animation: fadeUp 0.5s ease 0.3s both;
+			}
+			.btn-primary {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: var(--accent);
+				color: white;
+				border: none;
+				border-radius: var(--radius);
+				padding: 12px 22px;
+				font-family: var(--font);
+				font-size: 0.925rem;
+				font-weight: 500;
+				cursor: pointer;
+				text-decoration: none;
+				box-shadow: 0 2px 8px rgba(59, 110, 248, 0.3);
+				transition:
+					background 0.2s,
+					transform 0.15s,
+					box-shadow 0.2s;
+			}
+			.btn-primary:hover {
+				background: var(--accent-dark);
+				transform: translateY(-2px);
+				box-shadow: 0 4px 16px rgba(59, 110, 248, 0.35);
+			}
+			.btn-secondary {
+				font-size: 0.875rem;
+				color: var(--text-secondary);
+				font-weight: 400;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				text-decoration: none;
+				transition: color 0.2s;
+			}
+			.btn-secondary:hover {
+				color: var(--text-primary);
+			}
+			.win-note {
+				font-size: 0.78rem;
+				color: var(--text-muted);
+				margin-top: 0.6rem;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				animation: fadeUp 0.5s ease 0.35s both;
+			}
+
+			/* APP MOCKUP */
+			.mockup-wrap {
+				animation: fadeUp 0.5s ease 0.2s both;
+			}
+			.app-window {
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-xl);
+				box-shadow: var(--shadow-lg);
+				overflow: hidden;
+			}
+			.app-titlebar {
+				background: var(--surface-2);
+				border-bottom: 1px solid var(--border);
+				padding: 10px 16px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+			.window-dots {
+				display: flex;
+				gap: 6px;
+			}
+			.dot {
+				width: 11px;
+				height: 11px;
+				border-radius: 50%;
+			}
+			.dot-r {
+				background: #ff5f57;
+			}
+			.dot-y {
+				background: #febc2e;
+			}
+			.dot-g {
+				background: #28c840;
+			}
+			.app-title-text {
+				font-size: 0.78rem;
+				font-weight: 500;
+				color: var(--text-muted);
+				margin-left: 4px;
+				font-family: var(--mono);
+			}
+			.app-body {
+				padding: 16px;
+			}
+			.app-header-row {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 14px;
+			}
+			.app-section-label {
+				font-size: 0.72rem;
+				font-weight: 600;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--text-muted);
+			}
+			.app-add-btn {
+				font-size: 0.72rem;
+				background: var(--accent-light);
+				color: var(--accent);
+				border: none;
+				border-radius: 6px;
+				padding: 4px 10px;
+				cursor: pointer;
+				font-family: var(--font);
+				font-weight: 500;
+			}
+			.app-list {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				margin-bottom: 16px;
+			}
+			.app-item {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				background: var(--surface-2);
+				border: 1px solid var(--border-subtle);
+				border-radius: 8px;
+				padding: 9px 12px;
+			}
+			.app-item-icon {
+				width: 28px;
+				height: 28px;
+				border-radius: 6px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 0.9rem;
+				flex-shrink: 0;
+			}
+			.app-item-name {
+				font-size: 0.82rem;
+				font-weight: 500;
+				flex: 1;
+			}
+			.app-item-status {
+				font-size: 0.7rem;
+				font-weight: 500;
+				padding: 2px 8px;
+				border-radius: 999px;
+			}
+			.status-blocked {
+				background: #fef2f2;
+				color: #ef4444;
+			}
+			.status-sched {
+				background: var(--accent-light);
+				color: var(--accent);
+			}
+			.app-status-bar {
+				background: var(--surface-2);
+				border: 1px solid var(--border-subtle);
+				border-radius: 8px;
+				padding: 10px 12px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+			.status-dot-active {
+				width: 7px;
+				height: 7px;
+				background: #22c55e;
+				border-radius: 50%;
+				margin-right: 7px;
+				animation: pulse 2s infinite;
+			}
+			.status-bar-text {
+				font-size: 0.78rem;
+				color: var(--text-secondary);
+				display: flex;
+				align-items: center;
+			}
+			.status-bar-count {
+				font-size: 0.78rem;
+				font-weight: 600;
+				color: var(--accent);
+			}
+
+			/* PROBLEM SECTION */
+			.section {
+				padding: 72px 2rem;
+			}
+			.section-inner {
+				max-width: 1080px;
+				margin: 0 auto;
+			}
+			.problem-section {
+				background: var(--surface);
+				border-top: 1px solid var(--border);
+				border-bottom: 1px solid var(--border);
+			}
+			.section-tag {
+				font-size: 0.72rem;
+				font-weight: 600;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 1rem;
+			}
+			h2 {
+				font-size: clamp(1.5rem, 3vw, 2.1rem);
+				font-weight: 600;
+				letter-spacing: -0.025em;
+				line-height: 1.25;
+				margin-bottom: 1.25rem;
+			}
+			.problem-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 3rem;
+				align-items: center;
+				margin-top: 2.5rem;
+			}
+			.problem-copy p {
+				font-size: 1rem;
+				color: var(--text-secondary);
+				font-weight: 300;
+				line-height: 1.75;
+				margin-bottom: 1rem;
+			}
+			.problem-stats {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+			}
+			.stat-card {
+				background: var(--bg);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				padding: 20px;
+			}
+			.stat-number {
+				font-size: 2rem;
+				font-weight: 600;
+				letter-spacing: -0.04em;
+				color: var(--text-primary);
+				line-height: 1;
+			}
+			.stat-number span {
+				font-size: 1.2rem;
+				color: var(--accent);
+			}
+			.stat-label {
+				font-size: 0.8rem;
+				color: var(--text-muted);
+				margin-top: 4px;
+			}
+
+			/* FEATURES */
+			.features-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.25rem;
+				margin-top: 2.5rem;
+			}
+			.feature-card {
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				padding: 24px;
+				transition:
+					box-shadow 0.2s,
+					transform 0.2s,
+					border-color 0.2s;
+			}
+			.feature-card:hover {
+				box-shadow: var(--shadow-md);
+				transform: translateY(-2px);
+				border-color: var(--accent-mid);
+			}
+			.feature-icon {
+				width: 40px;
+				height: 40px;
+				background: var(--accent-light);
+				border-radius: 10px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: 1rem;
+			}
+			.feature-icon svg {
+				width: 20px;
+				height: 20px;
+				stroke: var(--accent);
+				fill: none;
+				stroke-width: 1.75;
+			}
+			.feature-title {
+				font-size: 0.95rem;
+				font-weight: 600;
+				margin-bottom: 0.5rem;
+			}
+			.feature-desc {
+				font-size: 0.875rem;
+				color: var(--text-secondary);
+				line-height: 1.6;
+				font-weight: 300;
+			}
+
+			/* HOW IT WORKS */
+			.how-section {
+				background: var(--surface);
+				border-top: 1px solid var(--border);
+				border-bottom: 1px solid var(--border);
+			}
+			.steps-row {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 2rem;
+				margin-top: 2.5rem;
+				position: relative;
+			}
+			.steps-row::before {
+				content: "";
+				position: absolute;
+				top: 26px;
+				left: calc(16.6% + 1rem);
+				right: calc(16.6% + 1rem);
+				height: 1px;
+				border-top: 1.5px dashed var(--border);
+			}
+			.step {
+				text-align: center;
+				padding: 0 1rem;
+			}
+			.step-num {
+				width: 52px;
+				height: 52px;
+				margin: 0 auto 1.25rem;
+				background: var(--surface);
+				border: 1.5px solid var(--border);
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1rem;
+				font-weight: 600;
+				color: var(--accent);
+				font-family: var(--mono);
+				position: relative;
+				z-index: 1;
+				box-shadow: var(--shadow-sm);
+			}
+			.step-title {
+				font-size: 1rem;
+				font-weight: 600;
+				margin-bottom: 0.5rem;
+			}
+			.step-desc {
+				font-size: 0.875rem;
+				color: var(--text-secondary);
+				font-weight: 300;
+				line-height: 1.65;
+			}
+			.step-code {
+				margin-top: 0.75rem;
+				background: var(--bg);
+				border: 1px solid var(--border-subtle);
+				border-radius: 8px;
+				padding: 8px 12px;
+				font-family: var(--mono);
+				font-size: 0.78rem;
+				color: var(--text-muted);
+				text-align: left;
+			}
+			.step-code span {
+				color: var(--accent);
+			}
+
+			/* WHY SECTION */
+			.compare-table {
+				margin-top: 2.5rem;
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				overflow: hidden;
+				background: var(--surface);
+			}
+			.compare-header {
+				display: grid;
+				grid-template-columns: 2fr 1fr 1fr;
+				background: var(--surface-2);
+				border-bottom: 1px solid var(--border);
+				padding: 14px 24px;
+				gap: 1rem;
+			}
+			.compare-header-cell {
+				font-size: 0.8rem;
+				font-weight: 600;
+				color: var(--text-muted);
+				text-align: center;
+			}
+			.compare-header-cell:first-child {
+				text-align: left;
+			}
+			.compare-header-cell.highlight {
+				color: var(--accent);
+			}
+			.compare-row {
+				display: grid;
+				grid-template-columns: 2fr 1fr 1fr;
+				padding: 14px 24px;
+				gap: 1rem;
+				border-bottom: 1px solid var(--border-subtle);
+				align-items: center;
+			}
+			.compare-row:last-child {
+				border-bottom: none;
+			}
+			.compare-row:hover {
+				background: var(--bg);
+			}
+			.compare-feature {
+				font-size: 0.875rem;
+				color: var(--text-primary);
+			}
+			.compare-cell {
+				text-align: center;
+				font-size: 0.875rem;
+			}
+			.check {
+				color: #22c55e;
+				font-size: 1.1rem;
+			}
+			.cross {
+				color: #ef4444;
+				font-size: 1.1rem;
+			}
+			.partial {
+				color: var(--text-muted);
+				font-size: 0.8rem;
+			}
+
+			/* CTA SECTION */
+			.cta-section {
+				text-align: center;
+				padding: 80px 2rem;
+			}
+			.cta-box {
+				max-width: 560px;
+				margin: 0 auto;
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-xl);
+				padding: 52px 48px;
+				box-shadow: var(--shadow-lg);
+				position: relative;
+				overflow: hidden;
+			}
+			.cta-box::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 3px;
+				background: linear-gradient(90deg, var(--accent), #7ca3ff);
+			}
+			.cta-box h2 {
+				font-size: 1.75rem;
+				margin-bottom: 0.75rem;
+			}
+			.cta-box p {
+				font-size: 1rem;
+				color: var(--text-secondary);
+				margin-bottom: 2rem;
+				font-weight: 300;
+			}
+			.cta-meta {
+				font-size: 0.78rem;
+				color: var(--text-muted);
+				margin-top: 1rem;
+			}
+
+			/* FOOTER */
+			footer {
+				border-top: 1px solid var(--border);
+				padding: 28px 2rem;
+				background: var(--surface);
+			}
+			.footer-inner {
+				max-width: 1080px;
+				margin: 0 auto;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				gap: 1rem;
+			}
+			.footer-brand {
+				font-size: 0.875rem;
+				font-weight: 600;
+				color: var(--text-primary);
+			}
+			.footer-links {
+				display: flex;
+				gap: 1.5rem;
+			}
+			.footer-links a {
+				font-size: 0.8rem;
+				color: var(--text-muted);
+				text-decoration: none;
+				transition: color 0.2s;
+			}
+			.footer-links a:hover {
+				color: var(--text-secondary);
+			}
+			.footer-right {
+				font-size: 0.78rem;
+				color: var(--text-muted);
+			}
+
+			/* DIVIDER */
+			.divider {
+				width: 40px;
+				height: 3px;
+				background: var(--accent);
+				border-radius: 2px;
+				margin: 1rem 0 1.5rem;
+			}
+
+			@keyframes fadeUp {
+				from {
+					opacity: 0;
+					transform: translateY(14px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+			@keyframes pulse {
+				0%,
+				100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.4;
+				}
+			}
+
+			/* RESPONSIVE */
+			@media (max-width: 768px) {
+				.hero {
+					grid-template-columns: 1fr;
+					gap: 2.5rem;
+					padding: 48px 1.25rem 40px;
+				}
+				.problem-grid {
+					grid-template-columns: 1fr;
+				}
+				.features-grid {
+					grid-template-columns: 1fr;
+				}
+				.steps-row {
+					grid-template-columns: 1fr;
+				}
+				.steps-row::before {
+					display: none;
+				}
+				.nav-links {
+					display: none;
+				}
+				.compare-header,
+				.compare-row {
+					grid-template-columns: 2fr 1fr 1fr;
+					padding: 12px 14px;
+				}
+				.cta-box {
+					padding: 36px 24px;
+				}
+				.hero-sub {
+					font-size: 0.95rem;
+				}
+				.problem-stats {
+					grid-template-columns: 1fr 1fr;
+				}
+				.section {
+					padding: 52px 1.25rem;
+				}
+				.footer-inner {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- NAV -->
+		<nav>
+			<div class="nav-inner">
+				<a href="#" class="nav-logo">
+					<div class="nav-logo-icon">
+						<svg viewBox="0 0 24 24">
+							<path d="M18 6L6 18M6 6l12 12" />
+							<circle
+								cx="12"
+								cy="12"
+								r="9"
+								fill="none"
+								stroke="white"
+								stroke-width="1.5"
+							/>
+						</svg>
+					</div>
+					WinLimit
+				</a>
+				<ul class="nav-links">
+					<li><a href="#features">Features</a></li>
+					<li><a href="#how">How it works</a></li>
+					<li><a href="#why">Why WinLimit</a></li>
+				</ul>
+				<a href="https://github.com/Er-Kal/WinLimit/releases/download/v1.0.2/WinLimit.zip" class="nav-cta">Download</a>
+			</div>
+		</nav>
+
+		<!-- HERO -->
+		<section>
+			<div class="hero">
+				<div class="hero-copy">
+					<h1>Stop the apps<br />that <em>steal</em> your time.</h1>
+					<p class="hero-sub">
+						WinLimit blocks desktop programs — not just websites. Keep games,
+						media players, and distracting software out of reach when you need
+						to focus.
+					</p>
+					<div class="hero-actions">
+						<a href="https://github.com/Er-Kal/WinLimit/releases/download/v1.0.2/WinLimit.zip" class="btn-primary" id="download">
+							<svg
+								width="15"
+								height="15"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="white"
+								stroke-width="2.5"
+								stroke-linecap="round"
+							>
+								<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+								<polyline points="7 10 12 15 17 10" />
+								<line x1="12" y1="15" x2="12" y2="3" />
+							</svg>
+							Download for Windows
+						</a>
+						<a href="#features" class="btn-secondary">See features →</a>
+					</div>
+					<div class="win-note">
+						<svg
+							width="12"
+							height="12"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<rect x="3" y="3" width="18" height="18" rx="2" />
+							<path d="M3 9h18M9 21V9" />
+						</svg>
+						Windows 10 / 11 · Portable · No account required
+					</div>
+				</div>
+
+				<!-- APP MOCKUP -->
+				<div class="mockup-wrap">
+					<div class="app-window">
+						<div class="app-titlebar">
+							<div class="window-dots">
+								<div class="dot dot-r"></div>
+								<div class="dot dot-y"></div>
+								<div class="dot dot-g"></div>
+							</div>
+							<span class="app-title-text">WinLimit</span>
+						</div>
+						<div class="app-body">
+							<div class="app-header-row">
+								<span class="app-section-label">Blocked Apps</span>
+								<button class="app-add-btn">+ Add app</button>
+							</div>
+							<div class="app-list">
+								<div class="app-item">
+									<div class="app-item-icon" style="background: #fef3c7">
+										🎮
+									</div>
+									<span class="app-item-name">Steam</span>
+									<span class="app-item-status status-blocked">Blocked</span>
+								</div>
+								<div class="app-item">
+									<div class="app-item-icon" style="background: #ede9fe">
+										📺
+									</div>
+									<span class="app-item-name">VLC Media Player</span>
+									<span class="app-item-status status-blocked">Blocked</span>
+								</div>
+								<div class="app-item">
+									<div class="app-item-icon" style="background: #e0f2fe">
+										🎵
+									</div>
+									<span class="app-item-name">Spotify (desktop)</span>
+									<span class="app-item-status status-sched">Scheduled</span>
+								</div>
+							</div>
+							<div class="app-status-bar">
+								<span class="status-bar-text"
+									><span class="status-dot-active"></span>Protection
+									active</span
+								>
+								<span class="status-bar-count">3 apps limited</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- PROBLEM -->
+		<section class="section problem-section">
+			<div class="section-inner">
+				<div class="problem-grid">
+					<div class="problem-copy">
+						<div class="section-tag">The problem</div>
+						<h2>
+							Desktop apps are your biggest distraction — and browser blockers
+							can't touch them.
+						</h2>
+						<div class="divider"></div>
+						<p>
+							Browser extensions only block websites. But Steam, Discord, games,
+							and media players run natively — completely outside the browser's
+							reach. Most productivity tools completely ignore this.
+						</p>
+						<p>
+							You install a focus timer. You open a game. Nothing stops you.
+							WinLimit fills that gap.
+						</p>
+					</div>
+					<div class="problem-stats">
+						<div class="stat-card">
+							<div class="stat-number">23<span>min</span></div>
+							<div class="stat-label">to regain focus after a distraction</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">7<span>hr</span></div>
+							<div class="stat-label">
+								unmanaged screen time
+							</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">3<span>hours</span></div>
+							<div class="stat-label">on average spent consuming media</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- FEATURES -->
+		<section class="section" id="features">
+			<div class="section-inner">
+				<div class="section-tag">Features</div>
+				<h2>Everything you need.<br />Nothing you don't.</h2>
+				<div class="features-grid">
+					<div class="feature-card">
+						<div class="feature-icon">
+							<svg viewBox="0 0 24 24">
+								<rect x="3" y="3" width="7" height="7" rx="1" />
+								<rect x="14" y="3" width="7" height="7" rx="1" />
+								<rect x="3" y="14" width="7" height="7" rx="1" />
+								<path d="M17.5 14v6M14.5 17h6" />
+							</svg>
+						</div>
+						<div class="feature-title">Block any desktop app</div>
+						<div class="feature-desc">
+							Pick any .exe on your system. WinLimit prevents it from launching
+							while a block session is active.
+						</div>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							<svg viewBox="0 0 24 24">
+								<circle cx="12" cy="12" r="9" />
+								<polyline points="12 7 12 12 15 15" />
+							</svg>
+						</div>
+						<div class="feature-title">Schedule blocking sessions</div>
+						<div class="feature-desc">
+							Set focus windows — block distractions from 9am to 5pm on weekdays
+							and allow free time in the evenings.
+						</div>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							<svg viewBox="0 0 24 24">
+								<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+							</svg>
+						</div>
+						<div class="feature-title">Lightweight and fast</div>
+						<div class="feature-desc">
+							Sits quietly in the system tray. Under 10MB. Near-zero CPU impact.
+							No background services or cloud sync.
+						</div>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							<svg viewBox="0 0 24 24">
+								<rect x="2" y="3" width="20" height="14" rx="2" />
+								<line x1="8" y1="21" x2="16" y2="21" />
+								<line x1="12" y1="17" x2="12" y2="21" />
+							</svg>
+						</div>
+						<div class="feature-title">Native Windows experience</div>
+						<div class="feature-desc">
+							Built with Avalonia UI. Feels at home on Windows 10 and 11 — not a
+							web app in a frame.
+						</div>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							<svg viewBox="0 0 24 24">
+								<circle cx="12" cy="12" r="3" />
+								<path
+									d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"
+								/>
+							</svg>
+						</div>
+						<div class="feature-title">Distraction-free interface</div>
+						<div class="feature-desc">
+							A simple, clean UI that doesn't compete for your attention. Add
+							apps, toggle sessions, done.
+						</div>
+					</div>
+					<div class="feature-card">
+						<div class="feature-icon">
+							<svg viewBox="0 0 24 24">
+								<rect x="5" y="2" width="14" height="20" rx="2" />
+								<line
+									x1="12"
+									y1="18"
+									x2="12"
+									y2="18"
+									stroke-linecap="round"
+									stroke-width="2.5"
+								/>
+							</svg>
+						</div>
+						<div class="feature-title">Portable — no install needed</div>
+						<div class="feature-desc">
+							Single executable. Run it from a USB stick, your desktop, or
+							anywhere. No installer, no registry clutter.
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- HOW IT WORKS -->
+		<section class="section how-section" id="how">
+			<div class="section-inner">
+				<div class="section-tag">How it works</div>
+				<h2>Three steps to a<br />more focused day.</h2>
+				<div class="steps-row">
+					<div class="step">
+						<div class="step-num">01</div>
+						<div class="step-title">Choose your apps</div>
+						<div class="step-desc">
+							Browse your installed programs and select the ones that tend to
+							pull you off track.
+						</div>
+						<div class="step-code">
+							<span>steam.exe</span> · vlc.exe · <span>discord.exe</span>
+						</div>
+					</div>
+					<div class="step">
+						<div class="step-num">02</div>
+						<div class="step-title">Set your limits</div>
+						<div class="step-desc">
+							Block indefinitely, set a timer, or schedule recurring focus
+							windows for your work routine.
+						</div>
+						<div class="step-code">Mon–Fri <span>09:00 → 17:30</span></div>
+					</div>
+					<div class="step">
+						<div class="step-num">03</div>
+						<div class="step-title">Stay focused</div>
+						<div class="step-desc">
+							WinLimit runs quietly in the background. Blocked apps won't open.
+							That's it.
+						</div>
+						<div class="step-code">
+							<span>Active</span> · 3 apps blocked · 4h 20m
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- WHY -->
+		<section class="section" id="why">
+			<div class="section-inner">
+				<div class="section-tag">Why WinLimit</div>
+				<h2>It works where other tools stop.</h2>
+				<div class="compare-table">
+					<div class="compare-header">
+						<div class="compare-header-cell">Feature</div>
+						<div class="compare-header-cell highlight">WinLimit</div>
+						<div class="compare-header-cell">Browser Extensions</div>
+					</div>
+					<div class="compare-row">
+						<div class="compare-feature">Blocks desktop apps (.exe)</div>
+						<div class="compare-cell"><span class="check">✓</span></div>
+						<div class="compare-cell"><span class="cross">✗</span></div>
+					</div>
+					<div class="compare-row">
+						<div class="compare-feature">Works without a browser open</div>
+						<div class="compare-cell"><span class="check">✓</span></div>
+						<div class="compare-cell"><span class="cross">✗</span></div>
+					</div>
+					<div class="compare-row">
+						<div class="compare-feature">Schedule-based blocking</div>
+						<div class="compare-cell"><span class="check">✓</span></div>
+						<div class="compare-cell"><span class="partial">Some</span></div>
+					</div>
+					<div class="compare-row">
+						<div class="compare-feature">No account or cloud required</div>
+						<div class="compare-cell"><span class="check">✓</span></div>
+						<div class="compare-cell"><span class="partial">Varies</span></div>
+					</div>
+					<div class="compare-row">
+						<div class="compare-feature">Portable — no installation</div>
+						<div class="compare-cell"><span class="check">✓</span></div>
+						<div class="compare-cell"><span class="cross">✗</span></div>
+					</div>
+					<div class="compare-row">
+						<div class="compare-feature">Native Windows UI</div>
+						<div class="compare-cell"><span class="check">✓</span></div>
+						<div class="compare-cell"><span class="cross">✗</span></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="cta-section">
+			<div class="cta-box">
+				<div
+					class="section-tag"
+					style="text-align: center; margin-bottom: 1rem"
+				>
+					Get started
+				</div>
+				<h2>Ready to limit the noise?</h2>
+				<p>
+					Free download. No account. Works on Windows 10 and 11. Takes 30
+					seconds to set up.
+				</p>
+				<a
+					href="#"
+					class="btn-primary"
+					style="display: inline-flex; justify-content: center"
+				>
+					<svg
+						width="15"
+						height="15"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="white"
+						stroke-width="2.5"
+						stroke-linecap="round"
+					>
+						<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+						<polyline points="7 10 12 15 17 10" />
+						<line x1="12" y1="15" x2="12" y2="3" />
+					</svg>
+					Download WinLimit — Free
+				</a>
+				<div class="cta-meta">v1.0 · ~8MB · Windows 10 / 11 · MIT licensed</div>
+			</div>
+		</section>
+
+		<!-- FOOTER -->
+		<footer>
+			<div class="footer-inner">
+				<span class="footer-brand">WinLimit</span>
+				<div class="footer-links">
+					<a href="#">Privacy</a>
+					<a href="#">Changelog</a>
+					<a href="#">GitHub</a>
+					<a href="#">Contact</a>
+				</div>
+				<span class="footer-right">Built with Avalonia UI</span>
+			</div>
+		</footer>
+
+		<script>
+			// Scroll-based fade-in for sections
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((e) => {
+						if (e.isIntersecting) {
+							e.target.style.opacity = "1";
+							e.target.style.transform = "translateY(0)";
+						}
+					});
+				},
+				{ threshold: 0.1 },
+			);
+
+			document
+				.querySelectorAll(".feature-card, .step, .stat-card, .compare-row")
+				.forEach((el) => {
+					el.style.opacity = "0";
+					el.style.transform = "translateY(16px)";
+					el.style.transition = "opacity 0.45s ease, transform 0.45s ease";
+					observer.observe(el);
+				});
+		</script>
+	</body>
+</html>
